@@ -1,0 +1,13 @@
+.card {
+    background-color: #FBDABB;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.card h3 {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #495E57;
+}
