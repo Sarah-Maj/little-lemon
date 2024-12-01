@@ -1,11 +1,15 @@
+import React from 'react';
+import './Footer.css';
+import { Link } from 'react-router-dom';
+
 function Footer () {
     return (
         <footer>
             <p>© 2024 Little Lemon. All Rights Reserved.</p>
             <ul>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#privacy">Privacy</a></li>
-                <li><a href="#social">Social</a></li>
+                <li><Link to="/contact">Contact</Link></li>
+                <li><Link to="/privacy">Privacy</Link></li>
+                <li><Link to="#social">Social</Link></li>
             </ul>
         </footer>
     );

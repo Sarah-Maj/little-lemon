@@ -1,13 +1,16 @@
+import {Link} from 'react-router-dom';
+import './Nav.css';
+
 function Nav() {
     return (
-        <nav>
+        <nav role="navigation">
             <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a hred="#menu">Menu</a></li>
-            <li><a hred="#reservations">Reservations</a></li>
-            <li><a href="#order-online">Order Online</a></li>
-            <li><a hred="#login">Login</a></li>
+            <li><Link to="/" aria-label="Go to Home page">Home</Link></li>
+            <li><Link to="/about" aria-label="Learn more about us">About</Link></li>
+            <li><Link to="/menu" aria-label="Check out our menu">Menu</Link></li>
+            <li><Link to="/reservations"aria-label="Make a reservation">Reservations</Link></li>
+            <li><Link to="/order-online" aria-label="Order food online">Order Online</Link></li>
+            <li><Link to="/login" aria-label="Log in to your account">Login</Link></li>
             </ul>
         </nav>
     );

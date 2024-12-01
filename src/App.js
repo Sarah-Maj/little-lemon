@@ -3,6 +3,12 @@ import Header from './Header';
 import Nav from './Nav';
 import Main from './Main';
 import Footer from './Footer';
+import AboutPage from './AboutPage';
+import MenuPage from './MenuPage';
+import BookingPage from './BookingPage';
+import OrderOnlinePage from './OrderOnlinePage';
+import LoginPage from './LoginPage';
+import {Routes, Route} from 'react-router-dom';
 import './Header.css';
 import './Main.css';
 import './Button.css';
@@ -17,7 +23,14 @@ function App() {
     <>
     <Header/>
     <Nav/>
-    <Main/>
+    <Routes>
+      <Route path="/" element={<Main/>} />
+      <Route path="/about" element={<AboutPage/>} />
+      <Route path="/menu" element={<MenuPage/>} />
+      <Route path="/reservations" element={<BookingPage/>} />
+      <Route path="/order-online" element={<OrderOnlinePage/>} />
+      <Route path="/login" element={<LoginPage/>} />
+    </Routes>
     <Footer/>
     </>
   );
