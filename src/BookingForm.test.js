@@ -1,55 +1,74 @@
-import {render,screen,act} from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import BookingForm from "./BookingForm";
 
-
-test("Renders the BookingForm heading", () => {
-    render(
-        <BookingForm
-        resDate=""
-        setResDate={() => {}}
-        resTime=""
-        setResTime={() => {}}
-        guests={1}
-        setGuests={() => {}}
-        occasion="Birthday"
-        setOccasion={() => {}}
-        availableTimes={["17:00", "18:00", "19:00", "20:00"]}
-        onSubmit={() => {}}
-        />
-    );
-
-    const dateInput = screen.getByLabelText(/reservation date/i); // Adjust the label text to match the component
-    const timeInput = screen.getByLabelText(/time/i); // Adjust the label text for time input
-    const guestsInput = screen.getByLabelText(/guests/i); // Adjust the label for guest input
-    const occasionInput = screen.getByLabelText(/occasion/i); // Adjust for occasion input
-
-    // Simulate filling out the form
-    fireEvent.change(dateInput, { target: { value: "2024-12-10" } });
-    fireEvent.change(timeInput, { target: { value: "18:00" } });
-    fireEvent.change(guestsInput, { target: { value: "4" } });
-    fireEvent.change(occasionInput, { target: { value: "Anniversary" } });
-
-    // Find and click the submit button
-    const submitButton = screen.getByRole("button", { name: /submit/i });
-    fireEvent.click(submitButton);
-
-    // Expect the mockSubmit function to have been called
-    expect(mockSubmit).toHaveBeenCalledTimes(1);
-
-    // You can also test that the mockSubmit was called with the correct arguments
-    expect(mockSubmit).toHaveBeenCalledWith({
-      resDate: "2024-12-10",
-      resTime: "18:00",
-      guests: 4,
-      occasion: "Anniversary"
-    });
-  });
-
-    test("Renders the date input label", () => {
+describe("BookingForm Component", () => {
+    test("Renders the form elements correctly", () => {
         render(<BookingForm />);
-        const label = screen.getByText(/Select Date/i);
-        expect(label).toBeInTheDocument();
+        
+        // Check form elements are rendered
+        expect(screen.getByLabelText(/choose date/i)).toBeInTheDocument();
+        expect(screen.getByLabelText(/choose time/i)).toBeInTheDocument();
+        expect(screen.getByLabelText(/number of guests/i)).toBeInTheDocument();
+        expect(screen.getByLabelText(/occasion/i)).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: /make your reservation/i })).toBeInTheDocument();
     });
 
-    const heading = screen.getByRole("heading", {name:/Booking Form/i});
-    expect(heading).toBeInTheDocument();
+    test("Date input has required HTML5 attributes", () => {
+        render(<BookingForm />);
+        const dateInput = screen.getByLabelText(/choose date/i);
+        expect(dateInput).toHaveAttribute("type", "date");
+        expect(dateInput).toHaveAttribute("required");
+    });
+
+    test("Guests input has minimum value", () => {
+        render(<BookingForm />);
+        const guestsInput = screen.getByLabelText(/number of guests/i);
+        expect(guestsInput).toHaveAttribute("type", "number");
+        expect(guestsInput).toHaveAttribute("min", "1");
+        expect(guestsInput).toHaveAttribute("required");
+    });
+
+    test("Select elements have required attributes", () => {
+        render(<BookingForm />);
+        
+        const timeSelect = screen.getByLabelText(/choose time/i);
+        expect(timeSelect).toHaveAttribute("required");
+        
+        const occasionSelect = screen.getByLabelText(/occasion/i);
+        expect(occasionSelect).toHaveAttribute("required");
+    });
+
+    test("Form submission works for valid input", () => {
+        const mockSubmit = jest.fn();
+        render(<BookingForm SubmitForm={mockSubmit} />);
+
+        fireEvent.change(screen.getByLabelText(/choose date/i), { target: { value: "2024-12-10" } });
+        fireEvent.change(screen.getByLabelText(/choose time/i), { target: { value: "18:00" } });
+        fireEvent.change(screen.getByLabelText(/number of guests/i), { target: { value: "4" } });
+        fireEvent.change(screen.getByLabelText(/occasion/i), { target: { value: "Anniversary" } });
+        
+        fireEvent.click(screen.getByRole("button", { name: /make your reservation/i }));
+
+        expect(mockSubmit).toHaveBeenCalledTimes(1);
+        expect(mockSubmit).toHaveBeenCalledWith({
+            date: "2024-12-10",
+            selectedTime: "18:00",
+            guests: "4",
+            occasion: "Anniversary"
+        });
+    });
+
+    test("Form does not submit for invalid input", () => {
+        const mockSubmit = jest.fn();
+        render(<BookingForm SubmitForm={mockSubmit} />);
+        
+        // Leave all fields empty and try to submit
+        fireEvent.click(screen.getByRole("button", { name: /make your reservation/i }));
+
+        expect(mockSubmit).not.toHaveBeenCalled();
+
+        // Check for validation errors 
+        expect(screen.queryByText(/please select a time/i)).toBeInTheDocument();
+        expect(screen.queryByText(/please select an occasion/i)).toBeInTheDocument();
+    });
+});

@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 
+
 // Define the fetchAPI function in this file
 const fetchAPI = function(date) {
     let result = [];
-    let randomSeed = (seed) => { // Renamed from 'random' to 'randomSeed'
+    let randomSeed = (seed) => {
         var m = 2**35 - 31;
         var a = 185852;
         var s = seed % m;
         return function() {
             return (s = s * a % m) / m;
-        }
+        };
     };
-    let random = randomSeed(date.getDate());  // Call the renamed randomSeed function
+    let random = randomSeed(date.getDate());
 
     for (let i = 17; i <= 23; i++) {
         if (random() < 0.5) {
@@ -24,7 +25,6 @@ const fetchAPI = function(date) {
     return result;
 };
 
-// Now you can use fetchAPI without errors
 const BookingForm = (props) => {
     const [date, setDate] = useState("");
     const [availableTimes, setAvailableTimes] = useState([]);
@@ -33,10 +33,12 @@ const BookingForm = (props) => {
     const [occasion, setOccasion] = useState("");
     const [bookingData, setBookingData] = useState([]); // Stores booking records
 
-       // Load the booking data from local storage on mount
-       useEffect(() => {
+    const [errors, setErrors] = useState({}); // Track field errors
+
+    // Load the booking data from local storage on mount
+    useEffect(() => {
         const storedBookings = JSON.parse(localStorage.getItem("bookingData")) || [];
-        setBookingData(storedBookings);  // Load from localStorage
+        setBookingData(storedBookings); // Load from localStorage
     }, []);
 
     // Save the updated booking data to local storage whenever it changes
@@ -46,28 +48,50 @@ const BookingForm = (props) => {
         }
     }, [bookingData]);
 
-    // Function to handle form submission
+    // Fetch available times when date changes
+    useEffect(() => {
+        if (date) {
+            const fetchedTimes = fetchAPI(new Date(date));
+            setAvailableTimes(fetchedTimes);
+        }
+    }, [date]);
+
+    const validateFields = () => {
+        const errors = {};
+        if (!date) errors.date = "Please select a date.";
+        if (!selectedTime) errors.selectedTime = "Please select a time.";
+        if (!guests || guests < 1 || guests > 10) errors.guests = "Guests must be between 1 and 10.";
+        if (!occasion) errors.occasion = "Please select an occasion.";
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Validate fields before submission
+        if (!validateFields()) {
+            return;
+        }
+
         const formData = { date, selectedTime, guests, occasion };
 
         // Use the SubmitForm function passed from Main component
         props.SubmitForm(formData);
 
-        // Update booking records (you could consider sending this to a backend instead)
+        // Update booking records
         setBookingData((prevBookingData) => {
             const newBookingData = [...prevBookingData, formData];
-            localStorage.setItem("bookingData", JSON.stringify(newBookingData));  // Sync with localStorage
+            localStorage.setItem("bookingData", JSON.stringify(newBookingData)); // Sync with localStorage
             return newBookingData;
         });
+
+        // Clear the form
+        setDate("");
+        setSelectedTime("");
+        setGuests("");
+        setOccasion("");
     };
-    // Fetch available times when date changes
-    useEffect(() => {
-        if (date) {
-            const fetchedTimes = fetchAPI(new Date(date)); // Now fetchAPI is defined here
-            setAvailableTimes(fetchedTimes);
-        }
-    }, [date]);
 
     return (
         <div>
@@ -82,8 +106,11 @@ const BookingForm = (props) => {
                                     value={date}
                                     onChange={(e) => setDate(e.target.value)}
                                     type="date"
+                                    min={new Date().toISOString().split("T")[0]} // Minimum date is today
                                     required
+                                    aria-describedby="dateError"
                                 />
+                                {errors.date && <p id="dateError" className="error">{errors.date}</p>}
                             </div>
                             <div>
                                 <label htmlFor="book-time">Choose Time:</label>
@@ -92,6 +119,7 @@ const BookingForm = (props) => {
                                     value={selectedTime}
                                     onChange={(e) => setSelectedTime(e.target.value)}
                                     required
+                                    aria-label="Choose a time for your booking"
                                 >
                                     <option value="">Select a Time</option>
                                     {availableTimes.map((time) => (
@@ -100,17 +128,21 @@ const BookingForm = (props) => {
                                         </option>
                                     ))}
                                 </select>
+                                {errors.selectedTime && <p className="error">{errors.selectedTime}</p>}
                             </div>
                             <div>
                                 <label htmlFor="book-guests">Number of Guests:</label>
                                 <input
                                     id="book-guests"
                                     min="1"
+                                    max="10"
                                     value={guests}
                                     onChange={(e) => setGuests(e.target.value)}
                                     type="number"
                                     required
+                                     aria-label="Choose the number of guests"
                                 />
+                                {errors.guests && <p className="error">{errors.guests}</p>}
                             </div>
                             <div>
                                 <label htmlFor="book-occasion">Occasion:</label>
@@ -119,17 +151,27 @@ const BookingForm = (props) => {
                                     value={occasion}
                                     onChange={(e) => setOccasion(e.target.value)}
                                     required
+                                     aria-label="Choose the occasion"
                                 >
                                     <option value="">Select Occasion</option>
                                     <option>Birthday</option>
                                     <option>Anniversary</option>
                                 </select>
+                                {errors.occasion && <p className="error">{errors.occasion}</p>}
                             </div>
                             <div>
                                 <input
                                     aria-label="On Click"
                                     type="submit"
                                     value="Make Your Reservation"
+                                    disabled={
+                                        !date ||
+                                        !selectedTime ||
+                                        !guests ||
+                                        guests < 1 ||
+                                        guests > 10 ||
+                                        !occasion
+                                    }
                                 />
                             </div>
                         </fieldset>
@@ -139,6 +181,7 @@ const BookingForm = (props) => {
 
             <main>
                 <h2>Booking Records</h2>
+                <div aria-live="polite">
                 {bookingData.length > 0 ? (
                     <table>
                         <thead>
@@ -163,6 +206,7 @@ const BookingForm = (props) => {
                 ) : (
                     <p>No bookings made yet.</p>
                 )}
+                </div>
             </main>
         </div>
     );

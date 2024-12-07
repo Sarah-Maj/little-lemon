@@ -1,11 +1,11 @@
-import { initializeTimes } from '../utils/api'; // Import the actual function
-import { fetchAPI } from '../utils/api';  // Assuming fetchAPI is in api.js
+import { initializeTimes } from "../utils/api";
+import { fetchAPI } from "../utils/api";
 
-jest.mock('../utils/api');  // Mock the fetchAPI function
+jest.mock("../utils/api");
 
-describe('initializeTimes', () => {
-    it('should return available times from fetchAPI', () => {
-        const mockTimes = ['17:00', '17:30', '18:00', '18:30'];
+describe("initializeTimes Function", () => {
+    it("Fetches available times based on the current date", () => {
+        const mockTimes = ["17:00", "17:30", "18:00"];
         fetchAPI.mockReturnValue(mockTimes);
 
         const date = new Date();
