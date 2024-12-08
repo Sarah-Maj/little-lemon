@@ -76,22 +76,21 @@ const BookingForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-
-        // Validate fields before submission
-        if (!validateFields()) {
-            return;
-        }
-
-
+        console.log("HandleSubmit triggered");
+        console.log("In BookingForm.js, props.SubmitForm:", props.SubmitForm);
         const formData = { date, selectedTime, guests, occasion };
-
 
         if (props.SubmitForm && typeof props.SubmitForm === "function") {
             props.SubmitForm(formData);
         } else {
             console.error("SubmitForm is not a function");
-        }
+        };
+
+        // Validate fields before submission
+        if (!validateFields()) {
+            return;
+        };
+
 
 
         // Update booking records

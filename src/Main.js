@@ -16,6 +16,7 @@ const Main = () => {
     const SubmitForm = (formData) => {
         console.log("Form submitted", formData);
         if(submitAPI(formData)){
+            console.log("Navigating to /confirmed");
             navigate("/confirmed");
         }
     };
@@ -61,12 +62,24 @@ const Main = () => {
     }
 
 
-    return(
+    return (
         <main>
             <Routes>
-                <Route path='/' element={<Header/>}/>
-                <Route path='/booking' element={<Booking availableTimes={state.availableTimes} dispatch={dispatch} SubmitForm={SubmitForm}/>}/>
-                <Route path='/confirmed' element={<ConfirmedBooking/>}/>
+                <Route path="/" element={<Header />} />
+                <Route
+                    path="/booking"
+                    element={
+                        <>
+                            {console.log("In Main.js, SubmitForm:", SubmitForm)}
+                            <Booking
+                                availableTimes={state.availableTimes}
+                                dispatch={dispatch}
+                                SubmitForm={SubmitForm}
+                            />
+                        </>
+                    }
+                />
+                <Route path="/confirmed" element={<ConfirmedBooking />} />
             </Routes>
 
 
