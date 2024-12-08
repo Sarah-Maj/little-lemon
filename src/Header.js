@@ -6,7 +6,7 @@ import bannerImg from'./assets/restauranfood.jpg';
 const Header = () => {
     return(
         <header className='header'>
-           <section>
+           <section className='content'>
             <div className='banner'>
                 <h2>Little Lemon</h2>
                 <h3>Chicago</h3>
@@ -14,7 +14,7 @@ const Header = () => {
             </div>
 
             <div className='banner-img'>
-                <img src={bannerImg} alt="" />
+                <img src={bannerImg} alt="Restaurant Food" />
             </div>
            </section>
         </header>

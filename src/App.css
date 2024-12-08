@@ -68,11 +68,14 @@ align-items: center;
 
 .header {
   background-color: #495e57;
-  padding: 40px 0;
+  padding: 40px 0%;
+  color:#edefee
 }
 
 .header section {
-  color: #edefee;
+  font-size:64px;
+  color: #f4ce14;
+  font-family:'Markazi Text', serif;
   padding: 10px 13%;
   position: relative;
 }
@@ -118,7 +121,7 @@ button {
   border-radius: 20px;
 }
 
-form, .comfirm{
+form, .confirm{
   padding: 10px 13%;
 }
 
@@ -149,7 +152,7 @@ input, label {
   border-radius: 4px;
 }
 
-.comfirm span {
+.confirm span {
   color:blue;
 }
 
@@ -207,7 +210,7 @@ justify-content: space-between;
 }
 
 footer section {
-  padding: 10px 13%;
+  padding: 40px 10%;
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -225,6 +228,7 @@ footer section {
 
 footer h3{
   font-size: 18px;
+  color:#fff;
 }
 
 footer ul{

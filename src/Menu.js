@@ -2,7 +2,7 @@ import React from 'react';
 import recipes from './recipes';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-
+import './Menu.css';
 const Menu = () => {
 
     const handleOrder = (id) => {

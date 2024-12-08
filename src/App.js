@@ -3,15 +3,32 @@ import './App.css';
 import Nav from './Nav.js';
 import Main from './Main';
 import Menu from './Menu';
+import Login from './Login';
+import Footer from './Footer';
+import Booking from './Booking';
+import About from './About';
+import Services from './Services';
+import OrderOnline from './OrderOnline';
+import ConfirmedBooking from './ConfirmedBooking';
+import {Routes, Route} from 'react-router-dom';
 
 function App() {
   return(
 
-    <>
+    <div className="App">
       <Nav/>
-      <Main/>
-      <Menu/>
-    </>
+      <Routes>
+        <Route path="/" element={<Main/>}/>
+        <Route path="/menu" element={<Menu/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/reservations" element={<Booking/>}/>
+        <Route path="/confirmed" element={<ConfirmedBooking/>}/>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/services" element={<Services/>}/>
+        <Route path="/order-online" element={<OrderOnline/>}/>
+      </Routes>
+      <Footer/>
+    </div>
   );
 }
 

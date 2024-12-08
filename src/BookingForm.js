@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './BookingForm.css';
 
 
 // Define the fetchAPI function in this file
@@ -14,16 +15,16 @@ const fetchAPI = function(date) {
     };
     let random = randomSeed(date.getDate());
 
+
     for (let i = 17; i <= 23; i++) {
         if (random() < 0.5) {
             result.push(i + ":00");
-        }
-        if (random() > 0.5) {
             result.push(i + ":30");
         }
     }
     return result;
 };
+
 
 const BookingForm = (props) => {
     const [date, setDate] = useState("");
@@ -33,13 +34,16 @@ const BookingForm = (props) => {
     const [occasion, setOccasion] = useState("");
     const [bookingData, setBookingData] = useState([]); // Stores booking records
 
+
     const [errors, setErrors] = useState({}); // Track field errors
+
 
     // Load the booking data from local storage on mount
     useEffect(() => {
         const storedBookings = JSON.parse(localStorage.getItem("bookingData")) || [];
         setBookingData(storedBookings); // Load from localStorage
     }, []);
+
 
     // Save the updated booking data to local storage whenever it changes
     useEffect(() => {
@@ -48,13 +52,16 @@ const BookingForm = (props) => {
         }
     }, [bookingData]);
 
+
     // Fetch available times when date changes
     useEffect(() => {
         if (date) {
             const fetchedTimes = fetchAPI(new Date(date));
+            console.log("Fetched Times:", fetchedTimes)
             setAvailableTimes(fetchedTimes);
         }
     }, [date]);
+
 
     const validateFields = () => {
         const errors = {};
@@ -66,18 +73,26 @@ const BookingForm = (props) => {
         return Object.keys(errors).length === 0;
     };
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
 
         // Validate fields before submission
         if (!validateFields()) {
             return;
         }
 
+
         const formData = { date, selectedTime, guests, occasion };
 
-        // Use the SubmitForm function passed from Main component
-        props.SubmitForm(formData);
+
+        if (props.SubmitForm && typeof props.SubmitForm === "function") {
+            props.SubmitForm(formData);
+        } else {
+            console.error("SubmitForm is not a function");
+        }
+
 
         // Update booking records
         setBookingData((prevBookingData) => {
@@ -86,6 +101,7 @@ const BookingForm = (props) => {
             return newBookingData;
         });
 
+
         // Clear the form
         setDate("");
         setSelectedTime("");
@@ -93,10 +109,12 @@ const BookingForm = (props) => {
         setOccasion("");
     };
 
+
     return (
         <div>
             <header>
                 <section>
+                    <h2>Make a Reservation</h2>
                     <form onSubmit={handleSubmit}>
                         <fieldset>
                             <div>
@@ -122,11 +140,15 @@ const BookingForm = (props) => {
                                     aria-label="Choose a time for your booking"
                                 >
                                     <option value="">Select a Time</option>
-                                    {availableTimes.map((time) => (
+                                    {availableTimes.length > 0 ? (
+                                    availableTimes.map((time) => (
                                         <option key={time} value={time}>
                                             {time}
                                         </option>
-                                    ))}
+                                    ))
+                                ):(
+                                    <option>No available times</option>
+                                )}
                                 </select>
                                 {errors.selectedTime && <p className="error">{errors.selectedTime}</p>}
                             </div>
@@ -179,6 +201,7 @@ const BookingForm = (props) => {
                 </section>
             </header>
 
+
             <main>
                 <h2>Booking Records</h2>
                 <div aria-live="polite">
@@ -211,5 +234,6 @@ const BookingForm = (props) => {
         </div>
     );
 };
+
 
 export default BookingForm;

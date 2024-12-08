@@ -1,0 +1,154 @@
+.order-online-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Markazi Text', serif;
+}
+
+/* Promo Banner Styling */
+.promo-banner {
+    background-color: #495E59;  /* Updated color */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 0;  /* Ensures it's at the top */
+}
+
+.promo-banner h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.promo-banner p {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* Order Online Header */
+.order-online-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.order-online-header p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Order Buttons */
+.order-online-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.order-btn {
+    background-color: #f5f5f5;
+    padding: 15px 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-btn img {
+    height: 40px;
+    width: auto;
+}
+
+.order-btn span {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.order-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.order-btn:active {
+    transform: translateY(0);
+}
+
+/* Delivery Areas Section */
+.delivery-area {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.delivery-area h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.delivery-area p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.delivery-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.delivery-list li {
+    margin: 5px 0;
+}
+
+.delivery-map {
+    margin-top: 20px;
+}
+
+.delivery-map img {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 8px;
+}
+
+/* Delivery FAQ */
+.delivery-faq {
+    margin-top: 30px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.delivery-faq h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.delivery-faq ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.delivery-faq li {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+    .order-btn {
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .delivery-area p, .delivery-faq ul li {
+        font-size: 1.1rem;
+    }
+}

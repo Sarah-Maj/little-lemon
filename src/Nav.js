@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
+import logo from './assets/logo.svg';
+import {Link} from 'react-router-dom';
 
 
 const Nav = () => {
@@ -11,9 +12,9 @@ const Nav = () => {
 
     return(
         <nav className={`navbar ${menuOpen ? "open" : ""}`}>
-          <a href="/" className="logo">
+          <Link to="/" className="logo">
           <img src={logo} alt='logo' />
-          </a>
+          </Link>
 
           <div className="menu-icon" onClick={toggleMenu}>
             <div className='bar'></div>
@@ -23,25 +24,25 @@ const Nav = () => {
 
           <ul className={`nav-links ${menuOpen ? "visible" : "" }`}>
             <li>
-                <a href='/' aria-label="Go to Home Page">Home</a>
+                <Link to='/' aria-label="Go to Home Page">Home</Link>
             </li>
             <li>
-                <a href='/about' aria-label="Learn more about us">About</a>
+                <Link to='/about' aria-label="Learn more about us">About</Link>
             </li>
             <li>
-                <a href='/Services' aria-label="Discover our services">Services</a>
+                <Link to='/Services' aria-label="Discover our services">Services</Link>
             </li>
             <li>
-                <a href='/Menu' aria-label="Check out our menu!">Menu</a>
+                <Link to='/Menu' aria-label="Check out our menu!">Menu</Link>
             </li>
             <li>
-                <a href='/Reservations' aria-label="Book your slot today!">Reservations</a>
+                <Link to='/Reservations' aria-label="Book your slot today!">Reservations</Link>
             </li>
             <li>
-                <a href='/0rderOnline' aria-label="Get it delievered to your door!">Order Online</a>
+                <Link to='/order-online' aria-label="Get it delievered to your door!">Order Online</Link>
             </li>
             <li>
-                <a href='/Login' aria-label="Login">Login</a>
+                <Link to='/Login' aria-label="Login">Login</Link>
             </li>
           </ul>
 

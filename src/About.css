@@ -1,0 +1,337 @@
+/* General Layout */
+:root {
+    --primary-color: #495E57;
+    --secondary-color: #F4CE14;
+    --highlight-color: #EE9972;
+    --dark-text: #333333;
+    --light-text: #EDEFEE;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 100%;
+    line-height: 1.6;
+}
+
+body {
+    font-family: 'Markazi Text', serif;
+    background-color: #FFF;
+    color: #777;
+    margin: 0;
+    padding: 0;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 10px;
+}
+
+/* Flexbox Layout for Rows */
+.vc_row.vc_row-flex {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 15px;
+}
+
+.vc_custom_1653014758045 {
+    padding-top: 8vh;
+    padding-bottom: 8vh;
+}
+
+.vc_row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: #495E57; /* Solid background color */
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    position: relative;
+    font-family: Playfair Display, serif;
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--secondary-color); /* Yellow color for Little Lemon */
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    font-size: 1.5rem;
+    color: white; /* Keep the text white */
+}
+
+/* Concept Section (Text and Image Split) */
+.concept-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 60px 15px;
+}
+
+.concept-text {
+    flex: 1;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--primary-color);
+}
+
+.concept-image {
+    flex: 1;
+    max-width: 50%;
+}
+
+.concept-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Team Section (Text and Image Layout) */
+.team-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    background-color: white; /* Removed yellow background */
+    color: var(--dark-text);
+    text-align: center;
+}
+
+.team-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    max-width: 800px; /* Limit text width */
+}
+
+.team-text br {
+    margin-bottom: 10px; /* Adds space after <br> for better readability */
+}
+
+.team-images {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.team-images img {
+    width: 150px; /* Reasonable size for the images */
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Venue Section (Image and Text Layout) */
+.venue-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 60px 15px;
+}
+
+.venue-text {
+    flex: 1;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--primary-color);
+}
+
+.venue-image {
+    flex: 1;
+    max-width: 50%;
+}
+
+.venue-image img {
+    width:100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Call to Action Section (Newsletter) */
+/* Newsletter Section */
+.newsletter-section {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Vertically center content */
+    align-items: center; /* Horizontally center content */
+    background-color: #495E57; /* Background color */
+    padding: 40px 20px;
+    color: white;
+    text-align: center;
+    min-height: 300px; /* Ensure the section has height to properly center the content */
+}
+
+/* Title and description */
+.newsletter-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.newsletter-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 600px; /* Limit text width */
+}
+
+/* Form */
+.newsletter-form {
+    display: flex;
+    flex-direction: column; /* Stack input and button */
+    align-items: center;
+}
+
+/* Input field */
+.newsletter-form input {
+    padding: 10px;
+    width: 100%; /* Full width on smaller screens */
+    max-width: 400px; /* Limit width of input field */
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px; /* Space between input and button */
+}
+
+/* Subscribe button */
+.newsletter-form button {
+    background-color: #F4CE14; /* Button color */
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    color: #333333; /* Text color */
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    width: 100%; /* Full width on smaller screens */
+    max-width: 400px; /* Limit button width */
+    margin-top: 10px; /* Space between input and button */
+}
+
+/* Hover effect for button */
+.newsletter-form button:hover {
+    background-color: #EE9972; /* Highlight color on hover */
+}
+/* Menus Section (Text and Button Layout) */
+/* Menus Section */
+.menu-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.menu-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.view-menu-link {
+    background-color: var(--secondary-color);
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    color: var(--dark-text);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.view-menu-link:hover {
+    background-color: var(--highlight-color);
+}
+/* About Page Container */
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Markazi Text', serif;
+}
+
+.about-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.about-header p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.about-story, .about-values, .about-team {
+    margin-bottom: 40px;
+}
+
+.about-story h3, .about-values h3, .about-team h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.about-values ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-values li {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.about-team p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* Gallery Section */
+.about-gallery {
+    margin-top: 30px;
+}
+
+.about-gallery h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.image-gallery {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-gallery img {
+    width: 30%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .image-gallery img {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

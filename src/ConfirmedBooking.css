@@ -1,0 +1,57 @@
+/* Confirmed Booking Page */
+.confirm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9fafb;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+.confirm .content {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.confirm h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #4CAF50; /* Green color for success */
+}
+
+.confirm h1 span {
+    font-weight: bold;
+}
+
+.confirm p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.confirm button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.confirm button:hover {
+    background-color: #45a049;
+}
+
+.confirm img {
+    width: 120px;
+    height: auto;
+    margin-top: 20px;
+}
